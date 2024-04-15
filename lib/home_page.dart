@@ -1,14 +1,15 @@
 import 'package:bloc_examples/counter_cubit.dart';
+import 'package:bloc_examples/inc_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
-  final counterCubit = CounterCubit();
-
   @override
   Widget build(BuildContext context) {
+    // Get the instance of counterCubit
+    final counterCubit = BlocProvider.of<CounterCubit>(context);
     return Scaffold(
       body: Center(
         child: Column(
@@ -26,8 +27,12 @@ class HomePage extends StatelessWidget {
               },
             ),
             ElevatedButton(
-              onPressed: () => counterCubit.increment(),
-              child: const Text("Increment"),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const IncPage(),
+                ),
+              ),
+              child: const Text("Go to Inc Page"),
             ),
           ],
         ),
